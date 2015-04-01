@@ -12,6 +12,7 @@ import AVFoundation
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordingInProgress: UILabel!
+    @IBOutlet weak var tapToRecord: UILabel!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
 
@@ -30,12 +31,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewWillAppear(animated: Bool) {
         // Hide the stop button
+        tapToRecord.hidden = false
         stopButton.hidden = true
         recordButton.enabled = true
     }
 
     @IBAction func recordAudio(sender: UIButton) {
         recordingInProgress.hidden = false
+        tapToRecord.hidden = true
         stopButton.hidden = false
         recordButton.enabled = false
         
