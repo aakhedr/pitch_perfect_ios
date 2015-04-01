@@ -12,7 +12,6 @@ import AVFoundation
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordingInProgress: UILabel!
-    @IBOutlet weak var tapToRecord: UILabel!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
 
@@ -31,14 +30,15 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewWillAppear(animated: Bool) {
         // Hide the stop button
-        tapToRecord.hidden = false
+        recordingInProgress.text = "Tap to record"
+        recordingInProgress.hidden = false
         stopButton.hidden = true
         recordButton.enabled = true
     }
 
     @IBAction func recordAudio(sender: UIButton) {
+        recordingInProgress.text = "Recording..."
         recordingInProgress.hidden = false
-        tapToRecord.hidden = true
         stopButton.hidden = false
         recordButton.enabled = false
         
@@ -89,7 +89,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func stopAudio(sender: UIButton) {
-        recordingInProgress.hidden = true
+        recordingInProgress.hidden = false
         // Stop recording the user's voice
         audioRecorder.stop()
         var audioSession = AVAudioSession.sharedInstance()
